@@ -1,0 +1,8 @@
+{
+  "name": "OTM Support",
+  "description": "Một ứng dụng quản lý ticket hỗ trợ theo dõi yêu cầu, xử lý sự cố, phân tích nguyên nhân gốc rễ và đo lường SLA.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": []
+}

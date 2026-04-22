@@ -1,0 +1,136 @@
+{
+  "entities": {
+    "Ticket": {
+      "title": "Ticket",
+      "description": "Thông tin chi tiết về ticket hỗ trợ",
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Ngày tạo ticket"
+        },
+        "photo": {
+          "type": "string",
+          "description": "URL hình ảnh đính kèm"
+        },
+        "request": {
+          "type": "string",
+          "description": "Nội dung yêu cầu"
+        },
+        "group": {
+          "type": "string",
+          "description": "ID hoặc tên nhóm xử lý"
+        },
+        "issue": {
+          "type": "string",
+          "description": "Vấn đề gặp phải"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Open", "In Progress", "Resolved", "Closed"],
+          "description": "Trạng thái ticket"
+        },
+        "pic": {
+          "type": "string",
+          "description": "ID hoặc tên người phụ trách (Person In Charge)"
+        },
+        "rootCauses": {
+          "type": "string",
+          "description": "Nguyên nhân gốc rễ"
+        },
+        "solutions": {
+          "type": "string",
+          "description": "Giải pháp xử lý"
+        },
+        "slaMinutes": {
+          "type": "number",
+          "description": "SLA theo phút"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["date", "request", "status"]
+    },
+    "Group": {
+      "title": "Group",
+      "description": "Danh sách các nhóm xử lý",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name"]
+    },
+    "PIC": {
+      "title": "PIC",
+      "description": "Danh sách nhân viên phụ trách",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "groupId": { "type": "string", "description": "Nhóm của nhân viên này" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name"]
+    },
+    "CaseStudy": {
+      "title": "CaseStudy",
+      "description": "Knowledge base entries for support cases",
+      "type": "object",
+      "properties": {
+        "caseNo": { "type": "string" },
+        "description": { "type": "string" },
+        "steps": { "type": "string" },
+        "notes": { "type": "string" },
+        "photos": { "type": "array" },
+        "userId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["caseNo", "description", "steps"]
+    },
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "User profile and role information",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["Admin", "Editor", "Viewer"] },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "lastLogin": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/tickets/{ticketId}": {
+      "schema": "Ticket",
+      "description": "Danh sách các ticket trong hệ thống"
+    },
+    "/groups/{groupId}": {
+      "schema": "Group",
+      "description": "Danh sách nhóm"
+    },
+    "/pics/{picId}": {
+      "schema": "PIC",
+      "description": "Danh sách nhân viên"
+    },
+    "/caseStudies/{caseId}": {
+      "schema": "CaseStudy",
+      "description": "Knowledge base case studies"
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles and roles"
+    }
+  }
+}
